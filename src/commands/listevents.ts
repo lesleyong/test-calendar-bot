@@ -14,7 +14,7 @@ export function makeListEventsHandler(db: Database.Database) {
       const end = e.end_date ? (e.end_time ? `${e.end_date} ${e.end_time}` : e.end_date) : null;
       const when = end ? `${start} → ${end}` : start;
       const desc = e.description ? ` — ${e.description}` : '';
-      return `*${when}* | ${e.name}${desc}`;
+      return `[${e.id}] *${when}* | ${e.name}${desc}`;
     });
     await ctx.reply(`📅 *Upcoming Events*\n\n${lines.join('\n')}`, {
       parse_mode: 'Markdown',

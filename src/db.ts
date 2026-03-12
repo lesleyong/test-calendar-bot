@@ -36,15 +36,9 @@ export function initDb(dbPath: string): Database.Database {
       type      TEXT    NOT NULL
     );
 
-    CREATE INDEX IF NOT EXISTS idx_events_date ON events(event_date);
+    CREATE INDEX IF NOT EXISTS idx_events_date ON events(start_date);
     CREATE INDEX IF NOT EXISTS idx_reminder_log_event ON reminder_log(event_id, type);
   `);
-
-  // Migrations for existing databases
-  try { db.exec('ALTER TABLE events RENAME COLUMN event_date TO start_date'); } catch {}
-  for (const col of ['start_time TEXT', 'end_date TEXT', 'end_time TEXT']) {
-    try { db.exec(`ALTER TABLE events ADD COLUMN ${col}`); } catch {}
-  }
 
   return db;
 }
