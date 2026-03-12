@@ -13,10 +13,10 @@ export function makeListEventsHandler(db: Database.Database) {
       const start = e.start_time ? `${e.start_date} ${e.start_time}` : e.start_date;
       const end = e.end_date ? (e.end_time ? `${e.end_date} ${e.end_time}` : e.end_date) : null;
       const when = end ? `${start} → ${end}` : start;
-      const desc = e.description ? ` — ${e.description}` : '';
-      return `[${e.id}] *${when}* | ${e.name}${desc}`;
+      const desc = e.description ? `\n${e.description}` : '';
+      return `[${e.id}] *${e.name}*\n🗓 ${when}${desc}`;
     });
-    await ctx.reply(`📅 *Upcoming Events*\n\n${lines.join('\n')}`, {
+    await ctx.reply(`📅 *Upcoming Events*\n\n${lines.join('\n\n')}`, {
       parse_mode: 'Markdown',
     });
   };

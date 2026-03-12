@@ -45,7 +45,7 @@ Group chats often lose track of planned events in the noise of daily messages. T
 
 | Command | Description |
 |---|---|
-| `/addevent <name> <start-date> [start-time] [end-date] [end-time] [description]` | Add event |
+| `/addevent name=... date=... [time=...] [end-date=...] [end-time=...] [desc=...]` | Add event |
 | `/listevents` | List all upcoming events (sorted by start date/time) |
 | `/deleteevent <id>` | Delete an event by its ID |
 
