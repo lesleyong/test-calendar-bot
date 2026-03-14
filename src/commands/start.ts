@@ -7,6 +7,7 @@ export async function handleStart(ctx: Context): Promise<void> {
     `*Commands:*\n` +
     `/addevent — Add an event\n` +
     `/listevents — Show upcoming events\n` +
+    `/links — Useful booking links\n` +
     `/setreminder — Set reminder for events\n` +
     `/setnudge — Set a nudge to book an event\n`,
     { parse_mode: 'MarkdownV2' }

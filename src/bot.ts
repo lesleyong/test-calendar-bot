@@ -61,3 +61,8 @@ process.once('SIGTERM', shutdown);
 bot.start({
   onStart: () => console.log('[bot] Bot started successfully'),
 });
+
+bot.api.setMyCommands([
+  { command: 'listevents', description: 'Show upcoming events' },
+  { command: 'links',      description: 'Show useful booking links' },
+]);

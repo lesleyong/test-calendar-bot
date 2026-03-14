@@ -76,7 +76,7 @@ Group chats often lose track of planned events in the noise of daily messages. T
 | `/settings` | Show current reminder days, nudge day/time | Anyone |
 | `/setreminder <days>` | Set pre-event reminder offset | Admin only |
 | `/setnudge <weekday> <HH:MM>` | Set nudge schedule | Admin only |
-| `/start` | Welcome message, displays help | Anyone |
+| `/start` | Welcome message, displays help (addevent, listevents, links, setreminder, setnudge) | Anyone |
 
 ### 5. Links
 
@@ -87,6 +87,7 @@ Group chats often lose track of planned events in the noise of daily messages. T
 - Accessible by any group member
 - Links are hardcoded in source; changing them requires a redeploy
 - Each link opens in a new browser page via Telegram inline URL button
+- `/listevents` and `/links` are registered via `setMyCommands` and appear in Telegram's command menu
 
 **Links:**
 - ActiveSG — https://activesg.gov.sg/home
