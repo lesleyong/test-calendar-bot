@@ -11,6 +11,7 @@ import { makeAddEventHandler } from './commands/addevent';
 import { makeSetReminderHandler } from './commands/setreminder';
 import { makeSetNudgeHandler } from './commands/setnudge';
 import { requireAdmin } from './middleware/adminGuard';
+import { handleLink } from './commands/links';
 
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const GROUP_CHAT_ID = process.env.GROUP_CHAT_ID;
@@ -28,6 +29,8 @@ bot.command('settings', makeSettingsHandler(db));
 bot.command('listevents', makeListEventsHandler(db));
 bot.command('deleteevent', makeDeleteEventHandler(db));
 bot.command('addevent', makeAddEventHandler(db));
+
+bot.command('links', handleLink);
 
 // Admin-only commands
 bot.command('setreminder', requireAdmin, makeSetReminderHandler(db));

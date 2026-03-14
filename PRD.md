@@ -78,6 +78,20 @@ Group chats often lose track of planned events in the noise of daily messages. T
 | `/setnudge <weekday> <HH:MM>` | Set nudge schedule | Admin only |
 | `/start` | Welcome message, displays help | Anyone |
 
+### 5. Links
+
+| Command | Description |
+|---|---|
+| `/links` | Post a list of useful links as tappable buttons |
+
+- Accessible by any group member
+- Links are hardcoded in source; changing them requires a redeploy
+- Each link opens in a new browser page via Telegram inline URL button
+
+**Links:**
+- ActiveSG — https://activesg.gov.sg/home
+- Play\!Pickle — https://mobileapp.courtreserve.com/Online/Portal/Navigate/13455?nodeItem=9
+
 ---
 
 ## Technical Requirements
@@ -88,8 +102,8 @@ Group chats often lose track of planned events in the noise of daily messages. T
 | Bot framework | grammY |
 | Database | SQLite (better-sqlite3) |
 | Scheduler | node-cron |
-| Deployment | Docker + docker-compose |
-| Persistence | Named Docker volume (survives container restarts) |
+| Deployment | Railway (production) / Docker + docker-compose (local) |
+| Persistence | Railway Volume mounted at `/app/data` (survives deploys and restarts) |
 
 ---
 
@@ -132,11 +146,20 @@ Group chats often lose track of planned events in the noise of daily messages. T
 
 ## Setup
 
+### Local (Docker)
+
 1. Create a bot via [@BotFather](https://t.me/BotFather) and get the `BOT_TOKEN`
 2. Add the bot to your group and grant it admin privileges (needed to check member status)
 3. Copy `.env.example` to `.env`, fill in `BOT_TOKEN` and `TZ`
 4. Run `docker compose up` — on first `/start`, the bot logs the group's chat ID
 5. Set `GROUP_CHAT_ID` in `.env` and restart: `docker compose restart`
+
+### Production (Railway)
+
+1. Create a Railway project and add a Volume, mounted at `/app/data`
+2. Set environment variables in Railway: `BOT_TOKEN`, `GROUP_CHAT_ID`, `TZ`, `DB_PATH=/app/data/bot.db`
+3. Deploy from the repo — Railway builds via the `Dockerfile` and runs the bot
+4. The SQLite database persists on the Railway Volume across all deploys and restarts
 
 ---
 
@@ -162,3 +185,4 @@ TZ=Asia/Singapore   # IANA timezone for cron jobs
 - [ ] `/setreminder` and `/setnudge` reject non-admin users
 - [ ] Bot survives container restart with all data intact
 - [ ] No duplicate reminders after restart
+- [ ] `/links` replies with inline URL buttons for ActiveSG and Play!Pickle
